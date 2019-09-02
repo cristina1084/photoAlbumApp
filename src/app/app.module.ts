@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { AddAlbumComponent } from './add-album/add-album.component';
 import { AddPhotoComponent } from './add-photo/add-photo.component';
 import { GalleryComponent } from './gallery/gallery.component';
@@ -18,6 +19,7 @@ import { CardModule } from "primeng/card";
 import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
 import { ButtonModule } from "primeng/button";
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ButtonModule } from "primeng/button";
     HomeComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
