@@ -1,1 +1,41 @@
-<p>register works!</p>
+<div class="login-body">
+    <div class="login-panel ui-fluid">
+        <div class="login-panel-header">
+            <img src="">
+            <h1>Photo Album</h1>
+        </div>
+        <div class="login-panel-content">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <h3>Register</h3>
+                </div>
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Full Name" [(ngModel)]="fullname" required>
+                    </span>
+                </div>
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input pInputText type="email" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Email" [(ngModel)]="email" required>
+                    </span>
+                </div>
+                <div class="ui-g-12">
+                        <span class="md-inputfield">
+                            <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Username" [(ngModel)]="username" required>
+                        </span>
+                    </div>
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input type="password" pPassword class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Password" [(ngModel)]="password" required>
+                    </span>
+                </div>
+                <div class="ui-g-12">
+                    <a routerLink="" icon="ui-icon-person" label="Submit" pButton> </a>
+                </div>
+                <div class="ui-g-12"> 
+                    Already have an account? <a routerLink="">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
