@@ -20,6 +20,8 @@ import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
 import { ButtonModule } from "primeng/button";
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { DynamicDialogModule } from "primeng/dynamicdialog";
+import { ToastModule } from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CardModule,
     InputTextModule,
     PasswordModule,
-    ButtonModule
+    ButtonModule,
+    DynamicDialogModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

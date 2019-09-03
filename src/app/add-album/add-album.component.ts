@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddAlbumComponent implements OnInit {
 
+  albumName: String;
+  albumDescription: String;
   constructor() { }
 
   ngOnInit() {
   }
 
+  submitData(){
+    console.log(this.albumName);
+    console.log(this.albumDescription);
+    
+    
+  }
 }
