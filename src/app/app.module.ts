@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { FileUploadModule } from "ng2-file-upload";
 
 import { AddAlbumComponent } from './add-album/add-album.component';
 import { AddPhotoComponent } from './add-photo/add-photo.component';
@@ -41,6 +44,8 @@ import { ToastModule } from "primeng/toast";
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    FileUploadModule,
     CardModule,
     InputTextModule,
     PasswordModule,

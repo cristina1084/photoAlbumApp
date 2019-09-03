@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DynamicDialogRef } from "primeng/api";
 
 @Component({
   selector: 'app-add-album',
@@ -9,7 +10,7 @@ export class AddAlbumComponent implements OnInit {
 
   albumName: String;
   albumDescription: String;
-  constructor() { }
+  constructor(public ref: DynamicDialogRef) { }
 
   ngOnInit() {
   }
@@ -17,6 +18,7 @@ export class AddAlbumComponent implements OnInit {
   submitData(){
     console.log(this.albumName);
     console.log(this.albumDescription);
+    this.ref.close(this.albumName);
     
     
   }
