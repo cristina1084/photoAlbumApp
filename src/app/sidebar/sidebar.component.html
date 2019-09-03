@@ -1,12 +1,6 @@
 <div class="layout-sidebar" [ngClass]="{'layout-sidebar-active':app.mobileMenuActive}">
     <ul class="layout-menu" (click)="app.hideMobileMenu($event)">
       <li>
-        <a [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-          <i class="pi pi-home"></i>
-          <span>Home</span>
-        </a>
-      </li>
-      <li>
         <a [routerLink]="['/home/gallery']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
           <i class="pi pi-images"></i>
           <span>Gallery</span>

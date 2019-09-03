@@ -25,6 +25,7 @@ import { ButtonModule } from "primeng/button";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DynamicDialogModule } from "primeng/dynamicdialog";
 import { ToastModule } from "primeng/toast";
+import { ViewphotosComponent } from './viewphotos/viewphotos.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ToastModule } from "primeng/toast";
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
-    SidebarComponent
+    SidebarComponent,
+    ViewphotosComponent
   ],
   imports: [
     BrowserModule,
