@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { ViewphotosComponent } from './viewphotos/viewphotos.component';
 
 const routes: Routes = [
   {path:"", component:LoginComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
     {path:"profile", component:ProfileComponent},
     {path:"gallery", component:GalleryComponent},
     {path:"addalbum", component:AddAlbumComponent},
-    {path:"addphoto", component:AddPhotoComponent}
+    {path:"addphoto", component:AddPhotoComponent},
+    {path:"gallery/viewphotos", component:ViewphotosComponent}
   ]},  
   
 

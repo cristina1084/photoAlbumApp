@@ -4,32 +4,56 @@
             <img src="../../assets/images/logo.png" class="topbar-logo" width="200px" >
         </div>
         <div class="login-panel-content">
-            <div class="ui-g">
+            <div class="ui-g" [formGroup]="registerForm">
                 <div class="ui-g-12">
                     <h3>Register</h3>
                 </div>
                 <div class="ui-g-12">
                     <span class="md-inputfield">
-                        <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Full Name" [(ngModel)]="fullname" required>
+                        <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Full Name" [(ngModel)]="user.fullname" formControlName="fullname">
                     </span>
+                </div>
+                <div class="ui-g-12" *ngIf="registerForm.controls['fullname'].hasError('required') && (registerForm.controls['fullname'].dirty || registerForm.controls['fullname'].touched)">
+                    <p-message severity="error" text="This field is required"></p-message>                    
+                </div>
+                <div class="ui-g-12" *ngIf="registerForm.controls['fullname'].hasError('pattern') && (registerForm.controls['fullname'].dirty || registerForm.controls['fullname'].touched)">
+                    <p-message severity="error" text="Please enter valid name"></p-message>
                 </div>
                 <div class="ui-g-12">
                     <span class="md-inputfield">
-                        <input pInputText type="email" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Email" [(ngModel)]="email" required>
+                        <input pInputText type="email" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Email" [(ngModel)]="user.email" formControlName="email">
                     </span>
                 </div>
-                <div class="ui-g-12">
-                        <span class="md-inputfield">
-                            <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Username" [(ngModel)]="username" required>
-                        </span>
-                    </div>
+                <div class="ui-g-12" *ngIf="registerForm.controls['email'].hasError('required') && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+                    <p-message severity="error" text="This field is required"></p-message>                                    
+                </div>
+                <div class="ui-g-12" *ngIf="registerForm.controls['email'].hasError('pattern') && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+                    <p-message severity="error" text="Please enter valid email address"></p-message>
+                </div>
                 <div class="ui-g-12">
                     <span class="md-inputfield">
-                        <input type="password" pPassword class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Password" [(ngModel)]="password" required>
+                        <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Username" [(ngModel)]="user.username" formControlName="username">
                     </span>
                 </div>
+                <div class="ui-g-12" *ngIf="registerForm.controls['username'].hasError('required') && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">
+                    <p-message severity="error" text="This field is required"></p-message>                                    
+                </div>
+                <div class="ui-g-12" *ngIf="alert">
+                    <p-message severity="warn" text="Username Exists"></p-message>  
+                </div>
                 <div class="ui-g-12">
-                    <a routerLink="" icon="ui-icon-person" label="Submit" pButton> </a>
+                    <span class="md-inputfield">
+                        <input type="password" pPassword class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Password" [(ngModel)]="user.password" formControlName="password">
+                    </span>
+                </div>
+                <div class="ui-g-12" *ngIf="registerForm.controls['password'].hasError('required') && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                    <p-message severity="error" text="This field is required"></p-message>                                    
+                </div>
+                <div class="ui-g-12" *ngIf="registerForm.controls['password'].hasError('minlength') && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                    <p-message severity="info" text="Password must be at least 6 characters"></p-message>
+                </div>
+                <div class="ui-g-12" >
+                    <input value="Submit" pButton (click)="signup()" [disabled]="!registerForm.valid" style="font-size: 1.25em">
                 </div>
                 <div class="ui-g-12"> 
                     Already have an account? <a routerLink="">Login</a>

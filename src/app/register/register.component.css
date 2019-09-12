@@ -19,11 +19,11 @@ h1 {
 
 .login-body .login-panel {
     width: 550px;
-    height: 650px;
+    height: 700px;
     background-color: #ffffff;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 40%;
     margin-left: -275px;
     margin-top: -240px;
     padding: 0;
@@ -36,7 +36,7 @@ h1 {
 }
 
 .login-body .login-panel .login-panel-content {
-    padding: 50px 100px;
+    padding: 25px 100px;
 }
 
 .login-body .login-panel .login-panel-content h3 {

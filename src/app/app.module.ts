@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { ViewphotosComponent } from './viewphotos/viewphotos.component';
 
 import { CardModule } from "primeng/card";
 import { InputTextModule } from "primeng/inputtext";
@@ -25,7 +26,9 @@ import { ButtonModule } from "primeng/button";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DynamicDialogModule } from "primeng/dynamicdialog";
 import { ToastModule } from "primeng/toast";
-import { ViewphotosComponent } from './viewphotos/viewphotos.component';
+import { MessageModule } from 'primeng/message';
+
+import { GalleryService } from "./gallery.service";
 
 @NgModule({
   declarations: [
@@ -53,9 +56,11 @@ import { ViewphotosComponent } from './viewphotos/viewphotos.component';
     PasswordModule,
     ButtonModule,
     DynamicDialogModule,
-    ToastModule
+    ToastModule,
+    MessageModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [],
+  providers: [GalleryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

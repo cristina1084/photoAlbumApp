@@ -4,22 +4,31 @@
             <img src="../../assets/images/logo.png" class="topbar-logo" width="200px" >
         </div>
         <div class="login-panel-content">
-            <div class="ui-g">
+            <div role="alert" *ngIf="alert">
+                <p-message severity="error" text="Incorrect Username or Password"></p-message>
+            </div>
+            <div class="ui-g" [formGroup]="loginForm">
                 <div class="ui-g-12">
                     <h3>Sign-in</h3>
                 </div>
                 <div class="ui-g-12">
                     <span class="md-inputfield">
-                        <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Username" [(ngModel)]="username" required>
+                        <input pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Username" [(ngModel)]="credintials.username" formControlName="username">
                     </span>
+                </div>
+                <div class="ui-g-12" *ngIf="loginForm.controls['username'].hasError('required') && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)">
+                    <p-message severity="error" text="This field is required"></p-message>
                 </div>
                 <div class="ui-g-12">
                     <span class="md-inputfield">
-                        <input type="password" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Password" [(ngModel)]="password" required>
+                        <input type="password" class="ui-inputtext ui-corner-all ui-state-default ui-widget" placeholder="Password" [(ngModel)]="credintials.password" formControlName="password">
                     </span>
                 </div>
+                <div class="ui-g-12" *ngIf="loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                    <p-message severity="error" text="This field is required"></p-message>
+                </div>
                 <div class="ui-g-12">
-                    <a routerLink="/home/gallery" icon="ui-icon-person" label="Sign In" pButton> </a>
+                        <input value="login" pButton (click)="login()" [disabled]="!loginForm.valid" style="font-size: 1.25em">
                 </div>
                 <div class="ui-g-12"> 
                     Don't have an account? <a routerLink="/register">Sign Up</a> now. 
