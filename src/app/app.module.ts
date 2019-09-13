@@ -29,6 +29,7 @@ import { ToastModule } from "primeng/toast";
 import { MessageModule } from 'primeng/message';
 
 import { GalleryService } from "./gallery.service";
+import { ImagePreviewDirective } from './image-preview.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GalleryService } from "./gallery.service";
     ProfileComponent,
     RegisterComponent,
     SidebarComponent,
-    ViewphotosComponent
+    ViewphotosComponent,
+    ImagePreviewDirective
   ],
   imports: [
     BrowserModule,
