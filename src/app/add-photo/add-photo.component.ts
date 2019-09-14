@@ -8,7 +8,8 @@ const URL = 'http://localhost:8080/api';
 @Component({
   selector: 'app-add-photo',
   templateUrl: './add-photo.component.html',
-  styleUrls: ['./add-photo.component.css']
+  styleUrls: ['./add-photo.component.css'],
+  providers: [MessageService]
 })
 export class AddPhotoComponent implements OnInit {
 

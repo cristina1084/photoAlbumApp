@@ -18,8 +18,7 @@ export class AddAlbumComponent implements OnInit {
   submitData(){
     console.log(this.albumName);
     console.log(this.albumDescription);
-    this.ref.close(this.albumName);
-    
+    this.ref.close({aname:this.albumName, adesc:this.albumDescription});
     
   }
 }

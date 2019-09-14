@@ -1,7 +1,15 @@
-<div class="row">
-    <div class="col">
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-lg-2" *ngFor="let a of album" style="word-wrap: break-word">
         <a [routerLink]="['/home/gallery/viewphotos']">
-            <p-card header="Album 1" [style]="{width: '250px'}"></p-card>
+            <p-card header="{{a.aname}}" [style]="{width: '250px'}"></p-card>
         </a>
     </div>
+    <br/>
 </div>  
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large teal pulse" (click)="addAlbum()">
+        <i class="pi pi-plus" style="font-size: 2em"></i>
+    </a>
+</div>

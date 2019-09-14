@@ -8,9 +8,11 @@ import  {AppComponent } from '../app.component';
 })
 export class HeaderComponent implements OnInit {
 
+  user;
   constructor(public app: AppComponent) { }
 
   ngOnInit() {
+    this.user = localStorage.getItem("Username");
   }
 
 }
