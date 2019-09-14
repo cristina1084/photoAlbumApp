@@ -27,6 +27,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { DynamicDialogModule } from "primeng/dynamicdialog";
 import { ToastModule } from "primeng/toast";
 import { MessageModule } from 'primeng/message';
+import { GalleriaModule, Galleria } from "primeng/galleria";
 
 import { GalleryService } from "./gallery.service";
 import { ImagePreviewDirective } from './image-preview.directive';
@@ -60,6 +61,7 @@ import { ImagePreviewDirective } from './image-preview.directive';
     DynamicDialogModule,
     ToastModule,
     MessageModule,
+    GalleriaModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [GalleryService],

@@ -19,4 +19,16 @@ export class GalleryService {
   getUser(user){
     return this.http.post("http://localhost:8080/login", user);
   }
+
+  addAlbum(album){
+    return this.http.post("http://localhost:8080/addalbum", album);
+  }
+
+  getAlbums(){
+    return this.http.get("http://localhost:8080/getalbum");
+  }
+
+  getPictures(){
+    return this.http.get("http://localhost:8080/getpictures");
+  }
 }

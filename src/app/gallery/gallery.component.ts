@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService, MessageService } from "primeng/api";
 import { AddAlbumComponent } from "../add-album/add-album.component";
+import { GalleryService } from "../gallery.service";
 
 @Component({
   selector: 'app-gallery',
@@ -10,11 +11,14 @@ import { AddAlbumComponent } from "../add-album/add-album.component";
 })
 export class GalleryComponent implements OnInit {
 
-  constructor(public dialogService: DialogService, public messageService: MessageService) { }
-  album = [];
+  constructor(public dialogService: DialogService, public messageService: MessageService, private gallery: GalleryService) { }
+
+  album;
 
   ngOnInit() {
-    
+    this.gallery.getAlbums().subscribe(data=>{
+      this.album = data;
+    })
   }
 
   addAlbum(){
@@ -26,11 +30,8 @@ export class GalleryComponent implements OnInit {
 
     ref.onClose.subscribe((data) =>{
       if (data) {
-          this.album.push(data);
-          console.log(this.album);
-          this.messageService.add({severity:'success', summary: 'Album Created', detail: data.aname});
+        this.messageService.add({severity:'success', summary: 'Album Created', detail: data.name});
       }
     });
   }
-  
 }

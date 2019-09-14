@@ -1,7 +1,7 @@
 <div class="ui-g">
     <div class="ui-g-12 ui-md-6 ui-lg-2" *ngFor="let a of album" style="word-wrap: break-word">
         <a [routerLink]="['/home/gallery/viewphotos']">
-            <p-card header="{{a.aname}}" [style]="{width: '250px'}"></p-card>
+            <p-card header="{{a.name}}" [style]="{width: '250px'}"></p-card>
         </a>
     </div>
     <br/>
