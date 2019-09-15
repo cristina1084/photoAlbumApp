@@ -25,11 +25,7 @@ export class ViewphotosComponent implements OnInit {
     constructor(private gallery: GalleryService) { }
 
     ngOnInit() {
-        this.gallery.getPictures().subscribe(data => {
-          this.images = data
-          console.log(this.images);
-          
-        })
+        this.gallery.getPictures().subscribe(data => this.images = data)
 
         this.sortOptions = [
             {label: 'Name', value: 'filename'},
@@ -60,6 +56,10 @@ export class ViewphotosComponent implements OnInit {
 
     onDialogHide() {
         this.selectedImage = null;
+    }
+
+    removePic(pic: Image){
+      this.gallery.deletePicture(pic.filename).subscribe(data => this.images = data)
     }
 
   /* 

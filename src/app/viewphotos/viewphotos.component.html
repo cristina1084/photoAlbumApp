@@ -1,5 +1,4 @@
-<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename"
-    [sortField]="sortField" [sortOrder]="sortOrder">
+<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename, mimetype" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading">
     <p-header>
         <div class="ui-helper-clearfix">
             <div class="ui-g">
@@ -8,7 +7,8 @@
                 </div>
                 <div class="ui-g-6 ui-md-4 filter-container">
                     <div style="position:relative">
-                        <input type="search" pInputText placeholder="Search by Title" (keyup)="dv.filter($event.target.value)">
+                        <!--Available match modes are "contains"(Default), "startsWith", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt" and "gte"-->
+                        <input type="search" pInputText placeholder="Search by Title or Image type" (keyup)="dv.filter($event.target.value)">
                     </div>
                 </div>
                 <div class="ui-g-6 ui-md-4" style="text-align:right">
@@ -42,16 +42,16 @@
     <ng-template let-pic pTemplate="gridItem">
         <div style="padding:.5em" class="ui-g-12 ui-md-3">
             <p-panel [header]="pic.filename" [style]="{'text-align':'center'}">
-                <img src="http://localhost:8080/view/{{pic.filename}}" width="60">
-                <div class="car-detail">{{pic.mimetype}} - {{pic.size / (1024 * 1024) | number:'1.2-3'}} MB</div>
+                <img src="http://localhost:8080/view/{{pic.filename}}" width="250px"  (click)="selectImage($event, pic)" style="cursor: pointer">
                 <hr class="ui-widget-content" style="border-top:0">
-                <button pButton type="button" icon="pi pi-search" (click)="selectImage($event, pic)" style="margin-top:0"></button>
+                <button pButton type="button" class="ui-button-success" icon="pi pi-pencil" (click)="selectImage($event, pic)" style="margin:5px"></button>
+                <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="removePic(pic)" style="margin:5px"></button>
             </p-panel>
         </div>
     </ng-template>
 </p-dataView>
 
-<p-dialog header="Image Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '1000px'}"  (onAfterHide)="onDialogHide()">
+<p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '1000px'}"  (onAfterHide)="onDialogHide()" >
     <div class="ui-g" *ngIf="selectedImage">
         <div class="ui-g-12" style="text-align:center">
             <img src="http://localhost:8080/view/{{selectedImage.filename}}" height="500px">

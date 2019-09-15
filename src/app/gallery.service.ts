@@ -31,4 +31,8 @@ export class GalleryService {
   getPictures(){
     return this.http.get("http://localhost:8080/getpictures");
   }
+
+  deletePicture(pname){
+    return this.http.get("http://localhost:8080/deletepicture/"+pname);
+  }
 }
