@@ -24,10 +24,13 @@ import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
 import { ButtonModule } from "primeng/button";
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogModule } from "primeng/dynamicdialog";
 import { ToastModule } from "primeng/toast";
 import { MessageModule } from 'primeng/message';
-import { GalleriaModule, Galleria } from "primeng/galleria";
+import { DataViewModule } from 'primeng/dataview';
+import { DropdownModule } from 'primeng/dropdown';
+import { PanelModule } from 'primeng/panel';
 
 import { GalleryService } from "./gallery.service";
 import { ImagePreviewDirective } from './image-preview.directive';
@@ -58,10 +61,13 @@ import { ImagePreviewDirective } from './image-preview.directive';
     InputTextModule,
     PasswordModule,
     ButtonModule,
+    DialogModule,
     DynamicDialogModule,
     ToastModule,
     MessageModule,
-    GalleriaModule,
+    DataViewModule,
+    DropdownModule,
+    PanelModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [GalleryService],

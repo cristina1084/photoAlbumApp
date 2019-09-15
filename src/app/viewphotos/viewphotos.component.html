@@ -1,1 +1,71 @@
-<p-galleria [images]="images" panelWidth="500" panelHeight="313" [showCaption]="true"></p-galleria>
+<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename"
+    [sortField]="sortField" [sortOrder]="sortOrder">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                </div>
+                <div class="ui-g-6 ui-md-4 filter-container">
+                    <div style="position:relative">
+                        <input type="search" pInputText placeholder="Search by Title" (keyup)="dv.filter($event.target.value)">
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-md-4" style="text-align:right">
+                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-pic pTemplate="listItem">
+        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+            <div class="ui-g-12 ui-md-5" style="text-align:center">
+                <img src="http://localhost:8080/view/{{pic.filename}}" height="250px">
+            </div>
+            <div class="ui-g-12 ui-md-6 car-details">
+                <div class="ui-g">
+                    <div class="ui-g-2 ui-sm-6">Title </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{pic.filename}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">Type: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{pic.mimetype}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">Size </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{pic.size / (1024 * 1024) | number:'1.2-3'}} MB</b></div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-1 search-icon">
+                <button pButton type="button" icon="pi pi-search" (click)="selectImage($event, pic)"></button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-pic pTemplate="gridItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3">
+            <p-panel [header]="pic.filename" [style]="{'text-align':'center'}">
+                <img src="http://localhost:8080/view/{{pic.filename}}" width="60">
+                <div class="car-detail">{{pic.mimetype}} - {{pic.size / (1024 * 1024) | number:'1.2-3'}} MB</div>
+                <hr class="ui-widget-content" style="border-top:0">
+                <button pButton type="button" icon="pi pi-search" (click)="selectImage($event, pic)" style="margin-top:0"></button>
+            </p-panel>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<p-dialog header="Image Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '1000px'}"  (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedImage">
+        <div class="ui-g-12" style="text-align:center">
+            <img src="http://localhost:8080/view/{{selectedImage.filename}}" height="500px">
+        </div>
+        <!-- <div class="ui-g-4">Vin: </div>
+        <div class="ui-g-8">{{selectedCar.vin}}</div>
+
+        <div class="ui-g-4">Brand: </div>
+        <div class="ui-g-8">{{selectedCar.brand}}</div>
+
+        <div class="ui-g-4">Year: </div>
+        <div class="ui-g-8">{{selectedCar.year}}</div>
+
+        <div class="ui-g-4">Color: </div>
+        <div class="ui-g-8">{{selectedCar.color}}</div> -->
+    </div>
+</p-dialog>
