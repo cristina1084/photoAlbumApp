@@ -18,7 +18,7 @@ const routes: Routes = [
     {path:"gallery", component:GalleryComponent},
     {path:"addalbum", component:AddAlbumComponent},
     {path:"addphoto", component:AddPhotoComponent},
-    {path:"gallery/viewphotos", component:ViewphotosComponent}
+    {path:"gallery/:albumid/viewphotos", component:ViewphotosComponent}
   ]},  
   
 

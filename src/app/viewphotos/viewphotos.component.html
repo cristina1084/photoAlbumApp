@@ -1,3 +1,39 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onConfirm()" label="Yes" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<p-panel>
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{selectedAlbum}}</span>
+            <!-- <p-splitButton [style]="{'float':'right'}" label="Save" [model]="items"></p-splitButton> -->
+            <div class="ui-toolbar-group-right">
+                <button pButton type="button" icon="pi pi-plus" class="ui-button-info" (click)="addNewPhoto()" pTooltip="Add New Photo" tooltipPosition="top" placeholder="Top" style="margin:5px"></button>
+                <button pButton type="button" icon="pi pi-pencil" class="ui-button-success" (click)="update()" pTooltip="Edit Album Details" tooltipPosition="top" placeholder="Top" style="margin:5px"></button>
+                <button pButton type="button" icon="pi pi-times" class="ui-button-danger" (click)="delete()" pTooltip="Delete Album" tooltipPosition="top" placeholder="Top" style="margin:5px"></button>
+            </div>
+        </div>
+        
+    </p-header>
+        {{selectedAlbumDescription}}
+</p-panel>
+<br>
 <p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename, mimetype" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading">
     <p-header>
         <div class="ui-helper-clearfix">
@@ -20,9 +56,9 @@
     <ng-template let-pic pTemplate="listItem">
         <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
             <div class="ui-g-12 ui-md-5" style="text-align:center">
-                <img src="http://localhost:8080/view/{{pic.filename}}" height="250px">
+                <img src="http://localhost:8080/view/{{pic.filename}}" width="50%" >
             </div>
-            <div class="ui-g-12 ui-md-6 car-details">
+            <div class="ui-g-12 ui-md-6 ui-sm-12 car-details">
                 <div class="ui-g">
                     <div class="ui-g-2 ui-sm-6">Title </div>
                     <div class="ui-g-10 ui-sm-6"><b>{{pic.filename}}</b></div>
@@ -34,15 +70,15 @@
                     <div class="ui-g-10 ui-sm-6"><b>{{pic.size / (1024 * 1024) | number:'1.2-3'}} MB</b></div>
                 </div>
             </div>
-            <div class="ui-g-12 ui-md-1 search-icon">
-                <button pButton type="button" icon="pi pi-search" (click)="selectImage($event, pic)"></button>
+            <div class="ui-g-12 ui-md-1 search-icon" >
+                <button pButton type="button" icon="pi pi-search" (click)="selectImage($event, pic)" ></button>
             </div>
         </div>
     </ng-template>
     <ng-template let-pic pTemplate="gridItem">
-        <div style="padding:.5em" class="ui-g-12 ui-md-3">
-            <p-panel [header]="pic.filename" [style]="{'text-align':'center'}">
-                <img src="http://localhost:8080/view/{{pic.filename}}" width="250px"  (click)="selectImage($event, pic)" style="cursor: pointer">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3 ui-sm-12">
+            <p-panel [header]="pic.filename" [style]="{'text-align':'center'}" >
+                <img src="http://localhost:8080/view/{{pic.filename}}"  width="100%"  (click)="selectImage($event, pic)" style="cursor: pointer">
                 <hr class="ui-widget-content" style="border-top:0">
                 <button pButton type="button" class="ui-button-success" icon="pi pi-pencil" (click)="selectImage($event, pic)" style="margin:5px"></button>
                 <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="removePic(pic)" style="margin:5px"></button>

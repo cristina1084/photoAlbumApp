@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicDialogRef } from "primeng/api";
+import { DynamicDialogRef, DynamicDialogConfig } from "primeng/api";
 import { GalleryService } from "../gallery.service";
 
 @Component({
@@ -11,9 +11,13 @@ export class AddAlbumComponent implements OnInit {
 
   albumName: String;
   albumDescription: String;
-  constructor(public ref: DynamicDialogRef, private gallery: GalleryService) { }
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig, private gallery: GalleryService) { }
 
   ngOnInit() {
+    if (this.config.data){
+      this.albumName = this.config.data.albumName;
+      this.albumDescription = this.config.data.albumDescription;
+    }
   }
 
   submitData(){

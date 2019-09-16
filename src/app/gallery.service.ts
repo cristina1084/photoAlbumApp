@@ -35,4 +35,12 @@ export class GalleryService {
   deletePicture(pname){
     return this.http.get("http://localhost:8080/deletepicture/"+pname);
   }
+
+  deleteAlbum(album){
+    return this.http.get("http://localhost:8080/deletealbum/"+album);
+  }
+
+  editAlbum(album){
+    return this.http.post("http://localhost:8080/editalbum", album);
+  }
 }
