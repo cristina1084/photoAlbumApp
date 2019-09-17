@@ -4,6 +4,7 @@ import { Image } from "../images";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DialogService, MessageService } from "primeng/api";
 import { AddAlbumComponent } from '../add-album/add-album.component';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-viewphotos',
@@ -22,52 +23,67 @@ export class ViewphotosComponent implements OnInit {
     selectedImage: Image;
     selectedAlbum;
     selectedAlbumDescription;
+    items: MenuItem[];
+    user = localStorage.getItem("Username");
 
     constructor(private gallery: GalleryService, private route: ActivatedRoute, public messageService: MessageService, private router: Router, public dialogService: DialogService,) { }
 
     ngOnInit() {
-        this.gallery.getPictures().subscribe(data => this.images = data)
+      this.selectedAlbum = this.route.snapshot.paramMap.get('albumid');
 
-        this.sortOptions = [
-            {label: 'Name', value: 'filename'},
-            {label: 'Size', value: 'size'},
-            {label: 'Type', value: 'mimetype'}
-        ];
+      this.gallery.getPictures(this.selectedAlbum).subscribe(data => this.images = data)
 
-        this.selectedAlbum = this.route.snapshot.paramMap.get('albumid');
-        console.log(this.selectedAlbum);
-        this.gallery.getAlbums().subscribe(data=>{
-          for (const d in data) {
-            if (data.hasOwnProperty(d)) {
-              if (data[d].name === this.selectedAlbum)
-                this.selectedAlbumDescription = data[d].description;
-            }
+      this.sortOptions = [
+          {label: 'Name', value: 'filename'},
+          {label: 'Size', value: 'size'},
+          {label: 'Type', value: 'mimetype'}
+      ];
+
+      this.gallery.getAlbums(this.user).subscribe(data=>{
+        for (const d in data) {
+          if (data.hasOwnProperty(d)) {
+            if (data[d].name === this.selectedAlbum)
+              this.selectedAlbumDescription = data[d].description;
           }
-        })
+        }
+      })
+    }
+
+    onClickMenu(item: any){
+      this.items = [
+        {
+          label: 'Edit',
+          icon: 'pi pi-fw pi-pencil',
+          command: () => {console.log(item);}
+        },
+        {
+          label: 'Delete',
+          icon: 'pi pi-fw pi-trash',
+          command: () => {this.removePic(item);}
+        }
+      ];              
     }
 
     selectImage(event: Event, pic: Image) {
-        this.selectedImage = pic;
-        console.log(this.selectedImage);
-        
-        this.displayDialog = true;
-        event.preventDefault();
+      this.selectedImage = pic;
+      this.displayDialog = true;
+      event.preventDefault();
     }
 
     onSortChange(event) {
-        let value = event.value;
-        if (value.indexOf('!') === 0) {
-            this.sortOrder = -1;
-            this.sortField = value.substring(1, value.length);
-        }
-        else {
-            this.sortOrder = 1;
-            this.sortField = value;
-        }
+      let value = event.value;
+      if (value.indexOf('!') === 0) {
+          this.sortOrder = -1;
+          this.sortField = value.substring(1, value.length);
+      }
+      else {
+          this.sortOrder = 1;
+          this.sortField = value;
+      }
     }
 
     onDialogHide() {
-        this.selectedImage = null;
+      this.selectedImage = null;
     }
 
     removePic(pic: Image){
@@ -75,7 +91,7 @@ export class ViewphotosComponent implements OnInit {
     }
 
     addNewPhoto(){
-      this.router.navigateByUrl("/home/addphoto");
+      this.router.navigateByUrl("/home/"+this.selectedAlbum+"/addphoto");
     }
 
     update() {
@@ -91,7 +107,9 @@ export class ViewphotosComponent implements OnInit {
   
       ref.onClose.subscribe((data) =>{
         if (data) {
-          this.messageService.add({severity:'info', summary:'Success', detail:'Details Updated'});          
+          this.messageService.add({severity:'info', summary:'Success', detail:'Details Updated'});
+          this.selectedAlbum = data.newname;
+          this.selectedAlbumDescription = data.description;          
         }
       });
     }

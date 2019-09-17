@@ -33,6 +33,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { PanelModule } from 'primeng/panel';
 import { TooltipModule } from 'primeng/tooltip';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { GalleryService } from "./gallery.service";
 import { ImagePreviewDirective } from './image-preview.directive';
@@ -72,6 +73,7 @@ import { ImagePreviewDirective } from './image-preview.directive';
     DropdownModule,
     PanelModule,
     TooltipModule,
+    TieredMenuModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [GalleryService],

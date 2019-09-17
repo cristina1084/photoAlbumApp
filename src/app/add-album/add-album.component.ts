@@ -11,9 +11,11 @@ export class AddAlbumComponent implements OnInit {
 
   albumName: String;
   albumDescription: String;
+  user;
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig, private gallery: GalleryService) { }
 
   ngOnInit() {
+    this.user = localStorage.getItem("Username");
     if (this.config.data){
       this.albumName = this.config.data.albumName;
       this.albumDescription = this.config.data.albumDescription;
@@ -21,9 +23,13 @@ export class AddAlbumComponent implements OnInit {
   }
 
   submitData(){
-    // console.log(this.albumName);
-    // console.log(this.albumDescription);
-    this.gallery.addAlbum({name:this.albumName, description:this.albumDescription}).subscribe();
-    this.ref.close({name:this.albumName, description:this.albumDescription});
+    if (this.config.data){
+      this.gallery.editAlbum({oldname:this.config.data.albumName, newname:this.albumName, description:this.albumDescription}).subscribe();
+      this.ref.close({oldname:this.config.data.albumName, newname:this.albumName, description:this.albumDescription});
+    }
+    else{
+      this.gallery.addAlbum({user:this.user, name:this.albumName, description:this.albumDescription}).subscribe();
+      this.ref.close({user:this.user, name:this.albumName, description:this.albumDescription});
+    }
   }
 }

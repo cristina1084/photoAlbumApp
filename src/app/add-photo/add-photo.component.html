@@ -60,17 +60,17 @@
                     </div>
                 </div>
                 <br>
-                <button type="button" class="btn green darken-1 btn-s"
-                        (click)="uploader.uploadAll(); onUpload()" [disabled]="!uploader.getNotUploadedItems().length">
+                <button type="button" class="btn green darken-1 btn-s" (click)="uploader.uploadAll(); onUpload()" [disabled]="!uploader.getNotUploadedItems().length" style="margin:5px">
                     <span class="pi pi-upload"></span> Upload all
-                </button>&nbsp;&nbsp;
-                <button type="button" class="btn yellow darken-3 btn-s"
-                        (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                </button>
+                <button type="button" class="btn yellow darken-3 btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading" style="margin:5px">
                     <span class="pi pi-ban"></span> Cancel all
-                </button>&nbsp;&nbsp;
-                <button type="button" class="btn red darken-3 btn-s"
-                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                </button>
+                <button type="button" class="btn red darken-3 btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length" style="margin:5px">
                     <span class="pi pi-trash"></span> Remove all
+                </button>
+                <button type="button" class="btn blue darken-3 btn-s" [routerLink]="['/home/gallery/', selectedAlbum, 'viewphotos']" style="margin:5px">
+                    <span class="pi pi-images"></span> Go to Album
                 </button>
             </div>
         </div>

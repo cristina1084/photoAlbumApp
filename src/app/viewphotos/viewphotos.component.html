@@ -56,22 +56,23 @@
     <ng-template let-pic pTemplate="listItem">
         <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
             <div class="ui-g-12 ui-md-5" style="text-align:center">
-                <img src="http://localhost:8080/view/{{pic.filename}}" width="50%" >
+                <img src="http://localhost:8080/view/{{pic.filename}}" (click)="selectImage($event, pic)" style="cursor: pointer" width="50%" >
             </div>
-            <div class="ui-g-12 ui-md-6 ui-sm-12 car-details">
+            <div class="ui-g-12 ui-md-5 ui-sm-10 car-details">
                 <div class="ui-g">
-                    <div class="ui-g-2 ui-sm-6">Title </div>
+                    <div class="ui-g-2 ui-sm-6">Title: </div>
                     <div class="ui-g-10 ui-sm-6"><b>{{pic.filename}}</b></div>
 
                     <div class="ui-g-2 ui-sm-6">Type: </div>
                     <div class="ui-g-10 ui-sm-6"><b>{{pic.mimetype}}</b></div>
 
-                    <div class="ui-g-2 ui-sm-6">Size </div>
+                    <div class="ui-g-2 ui-sm-6">Size: </div>
                     <div class="ui-g-10 ui-sm-6"><b>{{pic.size / (1024 * 1024) | number:'1.2-3'}} MB</b></div>
                 </div>
             </div>
-            <div class="ui-g-12 ui-md-1 search-icon" >
-                <button pButton type="button" icon="pi pi-search" (click)="selectImage($event, pic)" ></button>
+            <div class="ui-g-12 ui-md-2 ui-sm-2 search-icon">
+                <button #btn type="button" pButton icon="pi pi-bars" (click)="menu.toggle($event); onClickMenu(pic)"></button>    
+                <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
             </div>
         </div>
     </ng-template>
@@ -79,9 +80,9 @@
         <div style="padding:.5em" class="ui-g-12 ui-md-3 ui-sm-12">
             <p-panel [header]="pic.filename" [style]="{'text-align':'center'}" >
                 <img src="http://localhost:8080/view/{{pic.filename}}"  width="100%"  (click)="selectImage($event, pic)" style="cursor: pointer">
-                <hr class="ui-widget-content" style="border-top:0">
+                <!-- <hr class="ui-widget-content" style="border-top:0">
                 <button pButton type="button" class="ui-button-success" icon="pi pi-pencil" (click)="selectImage($event, pic)" style="margin:5px"></button>
-                <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="removePic(pic)" style="margin:5px"></button>
+                <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="removePic(pic)" style="margin:5px"></button> -->
             </p-panel>
         </div>
     </ng-template>

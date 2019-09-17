@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService, MessageService } from "primeng/api";
 import { AddAlbumComponent } from "../add-album/add-album.component";
 import { GalleryService } from "../gallery.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-gallery',
@@ -11,12 +12,13 @@ import { GalleryService } from "../gallery.service";
 })
 export class GalleryComponent implements OnInit {
 
-  constructor(public dialogService: DialogService, public messageService: MessageService, private gallery: GalleryService) { }
+  constructor(public dialogService: DialogService, public messageService: MessageService, private gallery: GalleryService, private router: Router) { }
 
   album;
+  user = localStorage.getItem("Username");
 
   ngOnInit() {
-    this.gallery.getAlbums().subscribe(data=>{
+    this.gallery.getAlbums(this.user).subscribe(data=>{
       this.album = data;
     })
   }
@@ -31,6 +33,7 @@ export class GalleryComponent implements OnInit {
     ref.onClose.subscribe((data) =>{
       if (data) {
         this.messageService.add({severity:'success', summary: 'Album Created', detail: data.name});
+        this.router.navigateByUrl('/home/'+data.name+'/addphoto');
       }
     });
   }
