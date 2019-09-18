@@ -1,11 +1,49 @@
-<div class="ui-g">
-    <div class="ui-g-12 ui-md-6 ui-lg-2" *ngFor="let a of album" style="word-wrap: break-word">
-        <a [routerLink]="['/home/gallery/', a.name, 'viewphotos']">
-            <p-card header="{{a.name}}" [style]="{width: '250px'}"></p-card>
-        </a>
-    </div>
-    <br/>
-</div>  
+<p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onConfirm()" label="Yes" class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<p-dataView #dv [value]="album" [paginator]="true" [rows]="28" paginatorPosition="top" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading" layout="grid">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                </div>
+                <div class="ui-g-6 ui-md-4 filter-container">
+                    <div style="position:relative">
+                        <!--Available match modes are "contains"(Default), "startsWith", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt" and "gte"-->
+                        <input type="search" pInputText placeholder="Search by Album Title" (keyup)="dv.filter($event.target.value)">
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-md-4" style="text-align:right">
+                    <button pButton type="button" icon="pi pi-trash" [disabled]="length==0" label="Delete All Albums" class="ui-button-danger" (click)="deleteAllAlbums()" style="margin:5px"></button>
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-a pTemplate="gridItem">
+        <div class="ui-g-12 ui-md-6 ui-lg-3" style="word-wrap: break-word">
+            <a [routerLink]="['/home/gallery/', a.name, 'viewphotos']">
+                <p-card header="{{a.name}}" [style]="{width: '250px'}"></p-card>
+            </a>
+            <br>
+        </div>
+    </ng-template>
+</p-dataView>
 
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
 <div class="fixed-action-btn">

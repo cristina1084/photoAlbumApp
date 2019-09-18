@@ -37,6 +37,8 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 
 import { GalleryService } from "./gallery.service";
 import { ImagePreviewDirective } from './image-preview.directive';
+import { AuthGuardService } from './auth-guard.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { ImagePreviewDirective } from './image-preview.directive';
     RegisterComponent,
     SidebarComponent,
     ViewphotosComponent,
-    ImagePreviewDirective
+    ImagePreviewDirective,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,10 @@ import { ImagePreviewDirective } from './image-preview.directive';
     TieredMenuModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [GalleryService],
+  providers: [
+    GalleryService, 
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,8 +24,8 @@ export class AddAlbumComponent implements OnInit {
 
   submitData(){
     if (this.config.data){
-      this.gallery.editAlbum({oldname:this.config.data.albumName, newname:this.albumName, description:this.albumDescription}).subscribe();
-      this.ref.close({oldname:this.config.data.albumName, newname:this.albumName, description:this.albumDescription});
+      this.gallery.editAlbum({user:this.user, oldname:this.config.data.albumName, newname:this.albumName, description:this.albumDescription}).subscribe();
+      this.ref.close({user:this.user, oldname:this.config.data.albumName, newname:this.albumName, description:this.albumDescription});
     }
     else{
       this.gallery.addAlbum({user:this.user, name:this.albumName, description:this.albumDescription}).subscribe();

@@ -28,19 +28,27 @@ export class GalleryService {
     return this.http.get("http://localhost:8080/album/getalbum/"+user);
   }
 
-  deleteAlbum(album){
-    return this.http.get("http://localhost:8080/album/deletealbum/"+album);
+  deleteAlbum(user, album){
+    return this.http.get("http://localhost:8080/album/deletealbum/"+user+"/"+album);
   }
 
   editAlbum(album){
     return this.http.post("http://localhost:8080/album/editalbum", album);
   }
 
-  getPictures(album){
-    return this.http.get("http://localhost:8080/picture/getpictures/"+album);
+  getPictures(user, album){
+    return this.http.get("http://localhost:8080/picture/getpictures/"+user+"/"+album);
   }
 
-  deletePicture(pname){
-    return this.http.get("http://localhost:8080/picture/deletepicture/"+pname);
+  deletePicture(user, album, pname){
+    return this.http.get("http://localhost:8080/picture/deletepicture/"+user+"/"+album+"/"+pname);
+  }
+
+  deletePictures(user, album){
+    return this.http.get("http://localhost:8080/picture/deletepictures/"+user+"/"+album);
+  }
+
+  deleteAlbums(user){
+    return this.http.get("http://localhost:8080/album/deletealbums/"+user);
   }
 }

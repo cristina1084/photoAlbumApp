@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.credintials);
     this.gallery.getUser(this.credintials).subscribe(data=>{
       if (data['found'] == true){
         localStorage.setItem("Username",this.credintials['username'])

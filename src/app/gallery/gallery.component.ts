@@ -16,11 +16,22 @@ export class GalleryComponent implements OnInit {
 
   album;
   user = localStorage.getItem("Username");
+  sortOptions = [];
+  sortKey: string;
+  sortField: string;
+  sortOrder: number;
+  length;
 
   ngOnInit() {
-    this.gallery.getAlbums(this.user).subscribe(data=>{
+    this.gallery.getAlbums(this.user).subscribe(data => {
       this.album = data;
-    })
+      this.length = this.album.length;
+      console.log(this.album);
+      
+    });
+    this.sortOptions = [
+      {label: 'Name', value: 'name'}
+    ];
   }
 
   addAlbum(){
@@ -36,5 +47,31 @@ export class GalleryComponent implements OnInit {
         this.router.navigateByUrl('/home/'+data.name+'/addphoto');
       }
     });
+  }
+
+  onSortChange(event) {
+    let value = event.value;
+    if (value.indexOf('!') === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+    }
+    else {
+        this.sortOrder = 1;
+        this.sortField = value;
+    }
+  }
+
+  deleteAllAlbums(){
+    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+  }
+
+  onConfirm() {
+    this.gallery.deleteAlbums(this.user).subscribe(data => this.album = data);
+    this.messageService.clear('c');
+    this.router.navigateByUrl("/home/gallery");
+  }
+
+  onReject() {
+    this.messageService.clear('c');
   }
 }

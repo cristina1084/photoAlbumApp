@@ -58,3 +58,13 @@ h1 {
 }
 
 
+@media (max-width: 640px) {
+    .login-body .login-panel {
+      left: 0;
+      margin-left: 0;
+      width: 100%;
+    }
+    .login-body .login-panel .login-panel-content {
+      padding: 50px 25px;
+    }
+}
