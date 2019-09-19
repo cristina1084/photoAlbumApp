@@ -52,7 +52,7 @@
         {{selectedAlbumDescription}}
 </p-panel>
 <br>
-<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename, mimetype" [sortField]="sortField" [sortOrder]="sortOrder" loading="true" emptyMessage="No pictures found. Upload one!">
+<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename, mimetype" [sortField]="sortField" [sortOrder]="sortOrder" emptyMessage="No pictures found. Upload one!">
     <p-header>
         <div class="ui-helper-clearfix">
             <div class="ui-g">
