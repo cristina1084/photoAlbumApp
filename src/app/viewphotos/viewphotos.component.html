@@ -52,7 +52,7 @@
         {{selectedAlbumDescription}}
 </p-panel>
 <br>
-<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename, mimetype" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading">
+<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename, mimetype" [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading" emptyMessage="No pictures found. Upload one!">
     <p-header>
         <div class="ui-helper-clearfix">
             <div class="ui-g">
@@ -75,7 +75,7 @@
     <ng-template let-pic pTemplate="listItem">
         <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
             <div class="ui-g-12 ui-md-5" style="text-align:center">
-                <img src="http://localhost:8080/view/{{pic.filename}}" (click)="selectImage($event, pic)" style="cursor: pointer" width="50%" >
+                <img src="https://snapshots-server.herokuapp.com/view/{{pic.filename}}" (click)="selectImage($event, pic)" style="cursor: pointer" width="50%" >
             </div>
             <div class="ui-g-12 ui-md-5 ui-sm-10 car-details">
                 <div class="ui-g">
@@ -98,7 +98,7 @@
     <ng-template let-pic pTemplate="gridItem">
         <div style="padding:.5em" class="ui-g-12 ui-md-3 ui-sm-12">
             <p-panel [header]="pic.filename" [style]="{'text-align':'center'}" >
-                <img src="http://localhost:8080/view/{{pic.filename}}"  width="100%"  (click)="selectImage($event, pic)" style="cursor: pointer">
+                <img src="https://snapshots-server.herokuapp.com/view/{{pic.filename}}"  width="100%"  (click)="selectImage($event, pic)" style="cursor: pointer">
                 <!-- <hr class="ui-widget-content" style="border-top:0">
                 <button pButton type="button" class="ui-button-success" icon="pi pi-pencil" (click)="selectImage($event, pic)" style="margin:5px"></button>
                 <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="removePic(pic)" style="margin:5px"></button> -->
@@ -110,7 +110,7 @@
 <p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '1000px'}"  (onAfterHide)="onDialogHide()" >
     <div class="ui-g" *ngIf="selectedImage">
         <div class="ui-g-12" style="text-align:center">
-            <img src="http://localhost:8080/view/{{selectedImage.filename}}" height="500px">
+            <img src="https://snapshots-server.herokuapp.com/view/{{selectedImage.filename}}" height="500px">
         </div>
         <!-- <div class="ui-g-4">Vin: </div>
         <div class="ui-g-8">{{selectedCar.vin}}</div>

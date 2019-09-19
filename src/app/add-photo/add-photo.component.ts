@@ -4,7 +4,7 @@ import { FileUploader } from "ng2-file-upload";
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from "@angular/router";
 
-const URL = 'http://localhost:8080/picture/api/';
+const URL = 'https://snapshots-server.herokuapp.com/picture/api/';
 
 @Component({
   selector: 'app-add-photo',
