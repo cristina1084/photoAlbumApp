@@ -26,8 +26,7 @@ export class GalleryComponent implements OnInit {
     this.gallery.getAlbums(this.user).subscribe(data => {
       this.album = data;
       this.length = this.album.length;
-      console.log(this.album);
-      
+      // console.log(this.album);
     });
     this.sortOptions = [
       {label: 'Name', value: 'name'}
