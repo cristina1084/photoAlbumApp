@@ -1,72 +1,71 @@
 <!-- <div class="container"> -->
-    <p-toast [style]="{marginTop: '80px'}"></p-toast>
-    <div class="row">
-        <div class="col-md-3">
-            <h3>Upload Images to <span style="font-weight: bold"> {{selectedAlbum}} </span> </h3>
-            <input type="file" name="pimage" ng2FileSelect [uploader]="uploader" accept="image/*" multiple><br/>
-        </div><br><hr>  
-        <div class="col-md-9" style="margin-bottom: 40px">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th width="30%">Name</th>
-                    <th>Size</th>
-                    <th>Progress</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of uploader.queue">
-                    <td>
-                        <img src="" imgPreview [image]="item?._file" height="100px">
-                    </td>
-                    <td><strong>{{ item?.file?.name }}</strong></td>
-                    <td  nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                    <td>
-                        <div class="progress" style="margin-bottom: 0;">
-                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <span *ngIf="item.isSuccess"><i class="pi pi-check"></i></span>
-                        <span *ngIf="item.isCancel"><i class="pi pi-ban"></i></span>
-                        <span *ngIf="item.isError"><i class="pi pi-times"></i></span>
-                    </td>
-                    <td nowrap>
-                        <button type="button" class="btn btn-xs green darken-1"
-                                (click)="item.upload(); onUpload()" [disabled]="item.isReady || item.isUploading || item.isSuccess" style="margin:5px">
-                            <span class="pi pi-upload"></span> Upload
-                        </button>
-                        <button type="button" class="btn red darken-3 btn-xs"
-                                (click)="item.remove()" [disabled]="item.isSuccess" style="margin:5px">
-                            <span class="pi pi-trash"></span> Remove
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <p>Queue length: {{ uploader?.queue?.length }}</p>
-            <div>
-                <br>
-                <div>
-                    Queue progress:
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+<div class="row">
+    <div class="col-md-3">
+        <h3>Upload Images to <span style="font-weight: bold"> {{selectedAlbum}} </span> </h3>
+        <input type="file" name="pimage" ng2FileSelect [uploader]="uploader" accept="image/*" multiple><br/>
+    </div><br><hr>  
+    <div class="col-md-9" style="margin-bottom: 40px">
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th width="30%">Name</th>
+                <th>Size</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of uploader.queue">
+                <td>
+                    <img src="" imgPreview [image]="item?._file" height="100px">
+                </td>
+                <td><strong>{{ item?.file?.name }}</strong></td>
+                <td  nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                <td>
+                    <div class="progress" style="margin-bottom: 0;">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
                     </div>
+                </td>
+                <td class="text-center">
+                    <span *ngIf="item.isSuccess"><i class="pi pi-check"></i></span>
+                    <span *ngIf="item.isCancel"><i class="pi pi-ban"></i></span>
+                    <span *ngIf="item.isError"><i class="pi pi-times"></i></span>
+                </td>
+                <td nowrap>
+                    <button type="button" class="btn btn-xs green darken-1"
+                            (click)="item.upload(); onUpload()" [disabled]="item.isReady || item.isUploading || item.isSuccess" style="margin:5px">
+                        <span class="pi pi-upload"></span> Upload
+                    </button>
+                    <button type="button" class="btn red darken-3 btn-xs"
+                            (click)="item.remove()" [disabled]="item.isSuccess" style="margin:5px">
+                        <span class="pi pi-trash"></span> Remove
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p>Queue length: {{ uploader?.queue?.length }}</p>
+        <div>
+            <br>
+            <div>
+                Queue progress:
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
                 </div>
-                <br>
-                <button type="button" class="btn green darken-1 btn-s" (click)="uploader.uploadAll(); onUpload()" [disabled]="!uploader.getNotUploadedItems().length" style="margin:5px">
-                    <span class="pi pi-upload"></span> Upload all
-                </button>
-                <button type="button" class="btn red darken-3 btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length || !uploader.getNotUploadedItems().length" style="margin:5px">
-                    <span class="pi pi-trash"></span> Remove all
-                </button>
-                <button type="button" class="btn blue darken-3 btn-s" [routerLink]="['/home/gallery/', selectedAlbum, 'viewphotos']" style="margin:5px">
-                    <span class="pi pi-images"></span> Go to Album
-                </button>
             </div>
+            <br>
+            <button type="button" class="btn green darken-1 btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length" style="margin:5px">
+                <span class="pi pi-upload"></span> Upload all
+            </button>
+            <button type="button" class="btn red darken-3 btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length || !uploader.getNotUploadedItems().length" style="margin:5px">
+                <span class="pi pi-trash"></span> Remove all
+            </button>
+            <button type="button" class="btn blue darken-3 btn-s" [routerLink]="['/home/gallery/', selectedAlbum, 'viewphotos']" style="margin:5px">
+                <span class="pi pi-images"></span> Go to Album
+            </button>
         </div>
     </div>
+</div>
 <!-- </div> -->

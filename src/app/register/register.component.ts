@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   }
 
   signup(){
-    console.log(this.user);
+    // console.log(this.user);
     if (this.registerForm.valid){
       this.gallery.checkUsernameEmail(this.user).subscribe(data=>{
         if(data['found']==true) this.alert = true;
