@@ -28,7 +28,7 @@
                     <p-message severity="error" text="This field is required"></p-message>
                 </div>
                 <div class="ui-g-12">
-                        <input value="Login" pButton (click)="login()" [disabled]="!loginForm.valid" style="font-size: 1.25em">
+                        <input value="Login" type="button" pButton (click)="login()" [disabled]="!loginForm.valid" style="font-size: 1.25em">
                 </div>
                 <div class="ui-g-12"> 
                     Don't have an account? <a routerLink="/register"> <span style="color:#26a69a; font-weight: bold"> Sign Up </span> </a> now. 
