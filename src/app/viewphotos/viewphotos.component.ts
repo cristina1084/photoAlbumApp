@@ -108,7 +108,7 @@ export class ViewphotosComponent implements OnInit {
         albumDescription: this.selectedAlbumDescription
       },
       header: 'Edit Album',
-      width: '70%',
+      width: '50%',
       contentStyle: {"max-height": "350px", "overflow": "auto"}
     });
 
@@ -157,7 +157,7 @@ export class ViewphotosComponent implements OnInit {
         imageDescription: image['description']
       },
       header: 'Edit Image Details',
-      width: '70%',
+      width: '50%',
       contentStyle: {"max-height": "350px", "overflow": "auto"}
     });
 

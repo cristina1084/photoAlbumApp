@@ -36,7 +36,7 @@ export class GalleryComponent implements OnInit {
   addAlbum(){
     const ref = this.dialogService.open(AddAlbumComponent, {
       header: 'Add Album',
-      width: '70%',
+      width: '50%',
       contentStyle: {"max-height": "350px", "overflow": "auto"}
     });
 
