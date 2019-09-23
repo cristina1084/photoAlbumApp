@@ -35,7 +35,7 @@
                 </td>
                 <td nowrap>
                     <button type="button" class="btn btn-xs green darken-1"
-                            (click)="item.upload(); onUpload()" [disabled]="item.isReady || item.isUploading || item.isSuccess" style="margin:5px">
+                            (click)="item.upload();" [disabled]="item.isReady || item.isUploading || item.isSuccess" style="margin:5px">
                         <span class="pi pi-upload"></span> Upload
                     </button>
                     <button type="button" class="btn red darken-3 btn-xs"
