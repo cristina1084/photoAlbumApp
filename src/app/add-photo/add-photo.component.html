@@ -1,7 +1,8 @@
 <!-- <div class="container"> -->
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
     <div class="row">
         <div class="col-md-3">
-            <h3>Upload Images</h3>
+            <h3>Upload Images to <span style="font-weight: bold"> {{selectedAlbum}} </span> </h3>
             <input type="file" name="pimage" ng2FileSelect [uploader]="uploader" accept="image/*" multiple><br/>
         </div><br><hr>  
         <div class="col-md-9" style="margin-bottom: 40px">
@@ -35,15 +36,11 @@
                     </td>
                     <td nowrap>
                         <button type="button" class="btn btn-xs green darken-1"
-                                (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                (click)="item.upload(); onUpload()" [disabled]="item.isReady || item.isUploading || item.isSuccess" style="margin:5px">
                             <span class="pi pi-upload"></span> Upload
-                        </button>&nbsp;
-                        <button type="button" class="btn yellow darken-3 btn-xs"
-                                (click)="item.cancel()" [disabled]="!item.isUploading">
-                            <span class="pi pi-ban"></span> Cancel
-                        </button>&nbsp;
+                        </button>
                         <button type="button" class="btn red darken-3 btn-xs"
-                                (click)="item.remove()">
+                                (click)="item.remove()" [disabled]="item.isSuccess" style="margin:5px">
                             <span class="pi pi-trash"></span> Remove
                         </button>
                     </td>
@@ -63,10 +60,7 @@
                 <button type="button" class="btn green darken-1 btn-s" (click)="uploader.uploadAll(); onUpload()" [disabled]="!uploader.getNotUploadedItems().length" style="margin:5px">
                     <span class="pi pi-upload"></span> Upload all
                 </button>
-                <button type="button" class="btn yellow darken-3 btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading" style="margin:5px">
-                    <span class="pi pi-ban"></span> Cancel all
-                </button>
-                <button type="button" class="btn red darken-3 btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length" style="margin:5px">
+                <button type="button" class="btn red darken-3 btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length || !uploader.getNotUploadedItems().length" style="margin:5px">
                     <span class="pi pi-trash"></span> Remove all
                 </button>
                 <button type="button" class="btn blue darken-3 btn-s" [routerLink]="['/home/gallery/', selectedAlbum, 'viewphotos']" style="margin:5px">

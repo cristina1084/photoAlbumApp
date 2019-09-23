@@ -2772,8 +2772,8 @@ body .ui-dialog {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 body .ui-dialog .ui-dialog-titlebar {
-  border: 1px solid #333333;
-  background-color: #333333;
+  border: 1px solid #2a3238;
+  background-color: #2a3238;
   color: #ffffff;
   padding: 1em;
   font-weight: 700;

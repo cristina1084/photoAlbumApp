@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DialogService, MessageService } from "primeng/api";
 import { AddAlbumComponent } from '../add-album/add-album.component';
 import { MenuItem } from 'primeng/api';
+import { EditPhotoDetailsComponent } from '../edit-photo-details/edit-photo-details.component';
 
 @Component({
   selector: 'app-viewphotos',
@@ -35,12 +36,14 @@ export class ViewphotosComponent implements OnInit {
     this.gallery.getPictures(this.user, this.selectedAlbum).subscribe(data => {
       this.images = data;
       this.length = this.images.length;
+      // console.log(this.images);
     })
 
     this.sortOptions = [
-        {label: 'Name', value: 'filename'},
+        {label: 'Name', value: 'title'},
         {label: 'Size', value: 'size'},
-        {label: 'Type', value: 'mimetype'}
+        {label: 'Type', value: 'mimetype'},
+        {label: 'Filename', value:'filename'}
     ];
 
     this.gallery.getAlbums(this.user).subscribe(data=>{
@@ -58,7 +61,7 @@ export class ViewphotosComponent implements OnInit {
       {
         label: 'Edit',
         icon: 'pi pi-fw pi-pencil',
-        command: () => {console.log(item);}
+        command: () => {this.editImageDetails(item);}
       },
       {
         label: 'Delete',
@@ -139,10 +142,34 @@ export class ViewphotosComponent implements OnInit {
   onConfirmP() {
     //this.gallery.deleteAlbum(this.selectedAlbum).subscribe();
     this.gallery.deletePictures(this.user, this.selectedAlbum).subscribe(data => this.images = data);
+    this.length=0;
     this.messageService.clear('pc');
   }
 
   onRejectP() {
     this.messageService.clear('pc');
+  }
+
+  editImageDetails(image: Image){
+    const ref = this.dialogService.open(EditPhotoDetailsComponent, {
+      data:{
+        imageName : image['title'],
+        imageDescription: image['description']
+      },
+      header: 'Edit Image Details',
+      width: '70%',
+      contentStyle: {"max-height": "350px", "overflow": "auto"}
+    });
+
+    ref.onClose.subscribe((data) =>{
+      if (data) {
+        this.messageService.add({severity:'success', summary: 'Image details updated'});
+        // console.log(data);
+        this.gallery.editPictureDetails(
+          {user: this.user, albname: this.selectedAlbum, filename: image.filename, title: data.imgname, description: data.description}
+          ).subscribe(data => this.images = data);
+      }
+    });
+
   }
 }

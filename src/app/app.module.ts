@@ -34,11 +34,15 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PanelModule } from 'primeng/panel';
 import { TooltipModule } from 'primeng/tooltip';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { CalendarModule } from 'primeng/calendar';
+import { RadioButtonModule } from "primeng/radiobutton";
 
 import { GalleryService } from "./gallery.service";
 import { ImagePreviewDirective } from './image-preview.directive';
 import { AuthGuardService } from './auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DatePipe } from '@angular/common';
+import { EditPhotoDetailsComponent } from './edit-photo-details/edit-photo-details.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SidebarComponent,
     ViewphotosComponent,
     ImagePreviewDirective,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EditPhotoDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -77,11 +82,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PanelModule,
     TooltipModule,
     TieredMenuModule,
+    CalendarModule,
+    RadioButtonModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [
     GalleryService, 
-    AuthGuardService
+    AuthGuardService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

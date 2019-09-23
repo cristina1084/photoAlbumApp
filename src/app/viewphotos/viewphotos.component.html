@@ -49,10 +49,11 @@
         </div>
         
     </p-header>
+    <span *ngIf="selectedAlbumDescription==undefined || selectedAlbumDescription=='' " style="font-style: italic">Add description</span>
         {{selectedAlbumDescription}}
 </p-panel>
 <br>
-<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename, mimetype" [sortField]="sortField" [sortOrder]="sortOrder" emptyMessage="No pictures found. Upload one!">
+<p-dataView #dv [value]="images" [paginator]="true" [rows]="12" paginatorPosition="both" filterBy="filename,title" [sortField]="sortField" [sortOrder]="sortOrder" emptyMessage="No pictures found. Upload one!">
     <p-header>
         <div class="ui-helper-clearfix">
             <div class="ui-g">
@@ -62,7 +63,7 @@
                 <div class="ui-g-6 ui-md-4 filter-container">
                     <div style="position:relative">
                         <!--Available match modes are "contains"(Default), "startsWith", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt" and "gte"-->
-                        <input type="search" pInputText placeholder="Search by Title or Image type" (keyup)="dv.filter($event.target.value)">
+                        <input type="search" pInputText placeholder="Search by Title or Filename" (keyup)="dv.filter($event.target.value)">
                     </div>
                 </div>
                 <div class="ui-g-6 ui-md-4" style="text-align:right">
@@ -79,7 +80,13 @@
             </div>
             <div class="ui-g-12 ui-md-5 ui-sm-10 car-details">
                 <div class="ui-g">
-                    <div class="ui-g-2 ui-sm-6">Title: </div>
+                    <div class="ui-g-2 ui-sm-6" *ngIf='pic.title'>Title: </div>
+                    <div class="ui-g-10 ui-sm-6" *ngIf='pic.title'><b>{{pic.title}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6" *ngIf="pic.description">Description: </div>
+                    <div class="ui-g-10 ui-sm-6" *ngIf="pic.description"><b>{{pic.description}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">Filename: </div>
                     <div class="ui-g-10 ui-sm-6"><b>{{pic.filename}}</b></div>
 
                     <div class="ui-g-2 ui-sm-6">Type: </div>
@@ -97,12 +104,7 @@
     </ng-template>
     <ng-template let-pic pTemplate="gridItem">
         <div style="padding:.5em" class="ui-g-12 ui-md-3 ui-sm-12">
-            <p-panel [header]="pic.filename" [style]="{'text-align':'center'}" >
-                <img src="https://snapshots-server.herokuapp.com/view/{{pic.filename}}"  width="100%"  (click)="selectImage($event, pic)" style="cursor: pointer">
-                <!-- <hr class="ui-widget-content" style="border-top:0">
-                <button pButton type="button" class="ui-button-success" icon="pi pi-pencil" (click)="selectImage($event, pic)" style="margin:5px"></button>
-                <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="removePic(pic)" style="margin:5px"></button> -->
-            </p-panel>
+            <img src="https://snapshots-server.herokuapp.com/view/{{pic.filename}}"  width="100%"  (click)="selectImage($event, pic)" style="cursor: pointer">
         </div>
     </ng-template>
 </p-dataView>

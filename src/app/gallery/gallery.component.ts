@@ -67,7 +67,7 @@ export class GalleryComponent implements OnInit {
   onConfirm() {
     this.gallery.deleteAlbums(this.user).subscribe(data => this.album = data);
     this.messageService.clear('c');
-    this.router.navigateByUrl("/home/gallery");
+    this.length=0;
   }
 
   onReject() {

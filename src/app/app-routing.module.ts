@@ -12,6 +12,7 @@ import { ViewphotosComponent } from './viewphotos/viewphotos.component';
 
 import { AuthGuardService } from './auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EditPhotoDetailsComponent } from './edit-photo-details/edit-photo-details.component';
 
 const routes: Routes = [
   {path:"", component:LoginComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path:"profile", component:ProfileComponent},
     {path:"gallery", component:GalleryComponent, canActivate:[AuthGuardService]},
     {path:"addalbum", component:AddAlbumComponent},
+    {path:"editphoto", component:EditPhotoDetailsComponent},
     {path:":albumid/addphoto", component:AddPhotoComponent},
     {path:"gallery/:albumid/viewphotos", component:ViewphotosComponent}
   ]}, 

@@ -23,12 +23,14 @@ export class AddPhotoComponent implements OnInit {
   constructor(private messageService: MessageService, public sanitizer:DomSanitizer, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    
   }
 
+  removePic(item){
+    console.log(item);
+    
+  }
   onUpload() {
-    for (let index = 0; index < this.uploader.queue.length; index++) {
-      console.log(this.uploader.queue[index].file.name);
-    }
     this.messageService.add({severity: 'success', summary: 'Successfully Uploaded', detail: ''});
   }
 
