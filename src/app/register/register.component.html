@@ -53,7 +53,7 @@
                     <p-message severity="info" text="Password must be at least 6 characters"></p-message>
                 </div>
                 <div class="ui-g-12" >
-                    <input value="Submit" pButton (click)="signup()" [disabled]="!registerForm.valid" style="font-size: 1.25em">
+                    <input value="Submit" type="button" (click)="signup()" [disabled]="!registerForm.valid" style="font-size: 1.25em">
                 </div>
                 <div class="ui-g-12"> 
                     Already have an account? <a routerLink=""> <span style="color:#26a69a; font-weight: bold"> Login </span> </a>
